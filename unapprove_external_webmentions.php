@@ -16,7 +16,9 @@ if(!defined('ABSPATH')) exit;
 function action_comment_post( $comment_ID, $ca, $cd ) {
   if (get_comment_meta($comment_ID, 'webmention_source_url', true)) {
     $source_url = get_comment_meta($comment_ID, 'webmention_source_url', true));
-    if (!strpos($source_url, 'bix.blog') {
+    if (strpos($source_url, 'bix.blog') {
+      wp_set_comment_status($comment_ID, 'approve');
+    } else {
       wp_set_comment_status($comment_ID, 'hold');
     }
   }
